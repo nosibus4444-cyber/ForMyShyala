@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine? 🌹</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6f2;
+            font-family: sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+        h1 { color: #d63384; padding: 0 20px; }
+        .btn-container { position: relative; width: 100%; height: 100px; }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            transition: 0.2s;
+        }
+        #yesBtn { background-color: #28a745; color: white; left: 50%; transform: translateX(-110%); }
+        #noBtn { background-color: #dc3545; color: white; left: 50%; transform: translateX(10%); }
+        .photo-frame { width: 250px; border: 5px solid white; border-radius: 15px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="content">
+        <h1 id="question">Will you be my valentine? 🌹</h1>
+        <div class="btn-container">
+            <button id="yesBtn" onclick="celebrate()">Yes</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        let noCount = 0;
+
+        function moveButton() {
+            noCount++;
+            const btn = document.getElementById('noBtn');
+            const question = document.getElementById('question');
+
+            // Move the button
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+
+            // Trigger "Stop messing with me" after 7 clicks/hovers
+            if (noCount >= 7) {
+                question.innerText = "Stop messing with me! 😠";
+                // This is where your photo will go
+                if (!document.getElementById('myPhoto')) {
+                    const img = document.createElement('img');
+                    img.id = "myPhoto";
+                    img.src = "https://media1.tenor.com/m/dhuQV_msfiUAAAAd/cat-gun.gif"; // REPLACE THIS WITH YOUR LINK
+                    img.className = "photo-frame";
+                    document.getElementById('content').prepend(img);
+                }
+            }
+        }
+
+        function celebrate() {
+            document.body.innerHTML = `
+                <h1 style="color: #d63384;">muwahh ilove u piggy ❤️</h1>
+                <img src="https://static.vecteezy.com/system/resources/previews/054/833/966/large_2x/a-cute-dinosaur-hand-with-valentine-heart-graphic-free-vector.jpg" 
+                     style="width: 300px; border-radius: 20px;">
+            `;
+        }
+    </script>
+</body>
+</html>
